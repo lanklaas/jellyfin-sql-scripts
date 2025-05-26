@@ -4,7 +4,9 @@
 -- as played if it was stopped a while before the end. You can use [dotnet repl](https://github.com/jonsequitur/dotnet-repl) to get a
 -- pretty print version of the ticks: Console.WriteLine(TimeSpan.FromTicks(23888240000));
 
-select Username,SeriesName,SeasonName,played,playbackPositionTicks,RunTimeTicks,t.Name,SeriesId,t.IndexNumber,RunTimeTicks-playbackPositionTicks from TypedBaseItems t
+select Username,SeriesName,SeasonName,played,playbackPositionTicks,RunTimeTicks,t.Name,SeriesId,t.IndexNumber,
+RunTimeTicks-playbackPositionTicks,lastPlayedDate,concat('Console.WriteLine(TimeSpan.FromTicks(',playbackPositionTicks,'))') 
+from TypedBaseItems t
 join UserDatas ud
 on t.UserDataKey = ud.key
 join jellyfin.Users u
